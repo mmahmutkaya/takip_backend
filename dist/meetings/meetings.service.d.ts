@@ -10,6 +10,7 @@ export declare class MeetingsService {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -17,7 +18,6 @@ export declare class MeetingsService {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
     findAll(userId: string, projectId: string): Promise<({
@@ -30,6 +30,7 @@ export declare class MeetingsService {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -37,16 +38,15 @@ export declare class MeetingsService {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     })[]>;
     findOne(userId: string, projectId: string, meetingId: string): Promise<{
         cases: ({
             case: {
-                priority: import(".prisma/client").$Enums.CasePriority;
                 title: string;
                 id: string;
                 status: import(".prisma/client").$Enums.CaseStatus;
+                priority: import(".prisma/client").$Enums.CasePriority;
             };
         } & {
             caseId: string;
@@ -58,6 +58,7 @@ export declare class MeetingsService {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -65,7 +66,6 @@ export declare class MeetingsService {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
     update(userId: string, projectId: string, meetingId: string, dto: UpdateMeetingDto): Promise<{
@@ -75,6 +75,7 @@ export declare class MeetingsService {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -82,10 +83,10 @@ export declare class MeetingsService {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
     remove(userId: string, projectId: string, meetingId: string): Promise<{
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -93,7 +94,6 @@ export declare class MeetingsService {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
     private checkMemberAccess;

@@ -1,22 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import * as nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 @Injectable()
 export class MailService {
-  private transporter: nodemailer.Transporter;
+  private resend: Resend;
   private readonly logger = new Logger(MailService.name);
 
   constructor(private config: ConfigService) {
-    this.transporter = nodemailer.createTransport({
-      host: this.config.get('SMTP_HOST'),
-      port: Number(this.config.get('SMTP_PORT') ?? 587),
-      secure: this.config.get('SMTP_PORT') === '465',
-      auth: {
-        user: this.config.get('SMTP_USER'),
-        pass: this.config.get('SMTP_PASS'),
-      },
-    });
+    this.resend = new Resend(this.config.get('RESEND_API_KEY'));
   }
 
   async sendVerificationEmail(email: string, name: string, token: string) {
@@ -25,8 +17,10 @@ export class MailService {
 
     this.logger.log(`Doğrulama linki [${email}]: ${verifyUrl}`);
 
-    const info = await this.transporter.sendMail({
-      from: this.config.get('SMTP_FROM') ?? '"Takip" <noreply@takip.app>',
+    const from = this.config.get('MAIL_FROM') ?? 'Takip <onboarding@resend.dev>';
+
+    const { data, error } = await this.resend.emails.send({
+      from,
       to: email,
       subject: 'E-posta adresinizi doğrulayın — Takip',
       html: `
@@ -42,6 +36,10 @@ export class MailService {
       `,
     });
 
-    this.logger.log(`Doğrulama maili gönderildi [${email}] -> ${info.messageId}`);
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    this.logger.log(`Doğrulama maili gönderildi [${email}] -> ${data?.id}`);
   }
 }

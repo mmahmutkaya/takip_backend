@@ -30,7 +30,6 @@ export declare class CasesService {
             projectId: string;
         }) | null;
     } & {
-        priority: import(".prisma/client").$Enums.CasePriority;
         description: string | null;
         title: string;
         id: string;
@@ -38,6 +37,7 @@ export declare class CasesService {
         updatedAt: Date;
         projectId: string;
         status: import(".prisma/client").$Enums.CaseStatus;
+        priority: import(".prisma/client").$Enums.CasePriority;
         dueDate: Date | null;
         closedAt: Date | null;
         createdById: string;
@@ -68,7 +68,6 @@ export declare class CasesService {
             projectId: string;
         }) | null;
     } & {
-        priority: import(".prisma/client").$Enums.CasePriority;
         description: string | null;
         title: string;
         id: string;
@@ -76,6 +75,7 @@ export declare class CasesService {
         updatedAt: Date;
         projectId: string;
         status: import(".prisma/client").$Enums.CaseStatus;
+        priority: import(".prisma/client").$Enums.CasePriority;
         dueDate: Date | null;
         closedAt: Date | null;
         createdById: string;
@@ -120,7 +120,6 @@ export declare class CasesService {
             authorId: string;
         })[];
     } & {
-        priority: import(".prisma/client").$Enums.CasePriority;
         description: string | null;
         title: string;
         id: string;
@@ -128,6 +127,7 @@ export declare class CasesService {
         updatedAt: Date;
         projectId: string;
         status: import(".prisma/client").$Enums.CaseStatus;
+        priority: import(".prisma/client").$Enums.CasePriority;
         dueDate: Date | null;
         closedAt: Date | null;
         createdById: string;
@@ -158,7 +158,6 @@ export declare class CasesService {
             projectId: string;
         }) | null;
     } & {
-        priority: import(".prisma/client").$Enums.CasePriority;
         description: string | null;
         title: string;
         id: string;
@@ -166,13 +165,13 @@ export declare class CasesService {
         updatedAt: Date;
         projectId: string;
         status: import(".prisma/client").$Enums.CaseStatus;
+        priority: import(".prisma/client").$Enums.CasePriority;
         dueDate: Date | null;
         closedAt: Date | null;
         createdById: string;
         assigneeId: string | null;
     }>;
     remove(userId: string, projectId: string, caseId: string): Promise<{
-        priority: import(".prisma/client").$Enums.CasePriority;
         description: string | null;
         title: string;
         id: string;
@@ -180,6 +179,7 @@ export declare class CasesService {
         updatedAt: Date;
         projectId: string;
         status: import(".prisma/client").$Enums.CaseStatus;
+        priority: import(".prisma/client").$Enums.CasePriority;
         dueDate: Date | null;
         closedAt: Date | null;
         createdById: string;

@@ -10,6 +10,7 @@ export declare class MeetingsController {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -17,7 +18,6 @@ export declare class MeetingsController {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
     findAll(user: any, projectId: string): Promise<({
@@ -30,6 +30,7 @@ export declare class MeetingsController {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -37,16 +38,15 @@ export declare class MeetingsController {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     })[]>;
     findOne(user: any, projectId: string, id: string): Promise<{
         cases: ({
             case: {
-                priority: import(".prisma/client").$Enums.CasePriority;
                 title: string;
                 id: string;
                 status: import(".prisma/client").$Enums.CaseStatus;
+                priority: import(".prisma/client").$Enums.CasePriority;
             };
         } & {
             caseId: string;
@@ -58,6 +58,7 @@ export declare class MeetingsController {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -65,7 +66,6 @@ export declare class MeetingsController {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
     update(user: any, projectId: string, id: string, dto: UpdateMeetingDto): Promise<{
@@ -75,6 +75,7 @@ export declare class MeetingsController {
             id: string;
         };
     } & {
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -82,10 +83,10 @@ export declare class MeetingsController {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
     remove(user: any, projectId: string, id: string): Promise<{
+        scheduledAt: Date;
         description: string | null;
         title: string;
         id: string;
@@ -93,7 +94,6 @@ export declare class MeetingsController {
         updatedAt: Date;
         projectId: string;
         createdById: string;
-        scheduledAt: Date;
         location: string | null;
     }>;
 }

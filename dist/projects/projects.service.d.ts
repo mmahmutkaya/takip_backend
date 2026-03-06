@@ -20,8 +20,8 @@ export declare class ProjectsService {
             projectId: string;
         })[];
     } & {
-        name: string;
         description: string | null;
+        name: string;
         id: string;
         isActive: boolean;
         createdAt: Date;
@@ -38,8 +38,8 @@ export declare class ProjectsService {
             role: import(".prisma/client").$Enums.ProjectRole;
         }[];
     } & {
-        name: string;
         description: string | null;
+        name: string;
         id: string;
         isActive: boolean;
         createdAt: Date;
@@ -67,8 +67,8 @@ export declare class ProjectsService {
             projectId: string;
         })[];
     } & {
-        name: string;
         description: string | null;
+        name: string;
         id: string;
         isActive: boolean;
         createdAt: Date;
@@ -76,8 +76,8 @@ export declare class ProjectsService {
         slug: string;
     }>;
     update(userId: string, projectId: string, dto: UpdateProjectDto): Promise<{
-        name: string;
         description: string | null;
+        name: string;
         id: string;
         isActive: boolean;
         createdAt: Date;
@@ -85,8 +85,8 @@ export declare class ProjectsService {
         slug: string;
     }>;
     remove(userId: string, projectId: string): Promise<{
-        name: string;
         description: string | null;
+        name: string;
         id: string;
         isActive: boolean;
         createdAt: Date;
