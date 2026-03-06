@@ -6,26 +6,26 @@ export declare class ProjectsController {
     create(user: any, dto: CreateProjectDto): Promise<{
         members: ({
             user: {
-                id: string;
-                email: string;
                 name: string;
+                email: string;
+                id: string;
             };
         } & {
+            title: string | null;
             id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
-            title: string | null;
             permissions: string[];
             joinedAt: Date;
             projectId: string;
         })[];
     } & {
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
     findAll(user: any): Promise<({
@@ -34,16 +34,16 @@ export declare class ProjectsController {
             cases: number;
         };
         members: {
-            role: import(".prisma/client").$Enums.ProjectRole;
             title: string | null;
+            role: import(".prisma/client").$Enums.ProjectRole;
         }[];
     } & {
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     })[]>;
     findOne(user: any, id: string): Promise<{
@@ -52,45 +52,45 @@ export declare class ProjectsController {
         };
         members: ({
             user: {
-                id: string;
-                email: string;
                 name: string;
+                email: string;
+                id: string;
                 avatarUrl: string | null;
             };
         } & {
+            title: string | null;
             id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
-            title: string | null;
             permissions: string[];
             joinedAt: Date;
             projectId: string;
         })[];
     } & {
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
     update(user: any, id: string, dto: UpdateProjectDto): Promise<{
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
     remove(user: any, id: string): Promise<{
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
 }

@@ -6,193 +6,193 @@ export declare class CasesService {
     private notifications;
     constructor(prisma: PrismaService, notifications: NotificationsService);
     create(userId: string, projectId: string, dto: CreateCaseDto): Promise<{
+        _count: {
+            updates: number;
+        };
         createdBy: {
-            id: string;
             name: string;
+            id: string;
             avatarUrl: string | null;
         };
         assignee: ({
             user: {
-                id: string;
                 name: string;
+                id: string;
                 avatarUrl: string | null;
             };
         } & {
-            id: string;
             title: string | null;
-            projectId: string;
+            id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
             permissions: string[];
             joinedAt: Date;
+            projectId: string;
         }) | null;
-        _count: {
-            updates: number;
-        };
     } & {
-        id: string;
-        title: string;
-        description: string | null;
-        status: import(".prisma/client").$Enums.CaseStatus;
         priority: import(".prisma/client").$Enums.CasePriority;
-        dueDate: Date | null;
-        closedAt: Date | null;
+        description: string | null;
+        title: string;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
         projectId: string;
+        status: import(".prisma/client").$Enums.CaseStatus;
+        dueDate: Date | null;
+        closedAt: Date | null;
         createdById: string;
         assigneeId: string | null;
     }>;
     findAll(userId: string, projectId: string, filter: FilterCaseDto): Promise<({
+        _count: {
+            updates: number;
+        };
         createdBy: {
-            id: string;
             name: string;
+            id: string;
             avatarUrl: string | null;
         };
         assignee: ({
             user: {
-                id: string;
                 name: string;
+                id: string;
                 avatarUrl: string | null;
             };
         } & {
-            id: string;
             title: string | null;
-            projectId: string;
+            id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
             permissions: string[];
             joinedAt: Date;
+            projectId: string;
         }) | null;
-        _count: {
-            updates: number;
-        };
     } & {
-        id: string;
-        title: string;
-        description: string | null;
-        status: import(".prisma/client").$Enums.CaseStatus;
         priority: import(".prisma/client").$Enums.CasePriority;
-        dueDate: Date | null;
-        closedAt: Date | null;
+        description: string | null;
+        title: string;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
         projectId: string;
+        status: import(".prisma/client").$Enums.CaseStatus;
+        dueDate: Date | null;
+        closedAt: Date | null;
         createdById: string;
         assigneeId: string | null;
     })[]>;
     findOne(userId: string, projectId: string, caseId: string): Promise<{
+        _count: {
+            updates: number;
+        };
         createdBy: {
-            id: string;
             name: string;
+            id: string;
             avatarUrl: string | null;
         };
         assignee: ({
             user: {
-                id: string;
                 name: string;
+                id: string;
                 avatarUrl: string | null;
             };
         } & {
-            id: string;
             title: string | null;
-            projectId: string;
+            id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
             permissions: string[];
             joinedAt: Date;
+            projectId: string;
         }) | null;
         updates: ({
             author: {
-                id: string;
                 name: string;
+                id: string;
                 avatarUrl: string | null;
             };
         } & {
             id: string;
             createdAt: Date;
             updatedAt: Date;
-            content: string;
             caseId: string;
+            content: string;
             authorId: string;
         })[];
-        _count: {
-            updates: number;
-        };
     } & {
-        id: string;
-        title: string;
-        description: string | null;
-        status: import(".prisma/client").$Enums.CaseStatus;
         priority: import(".prisma/client").$Enums.CasePriority;
-        dueDate: Date | null;
-        closedAt: Date | null;
+        description: string | null;
+        title: string;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
         projectId: string;
+        status: import(".prisma/client").$Enums.CaseStatus;
+        dueDate: Date | null;
+        closedAt: Date | null;
         createdById: string;
         assigneeId: string | null;
     }>;
     update(userId: string, projectId: string, caseId: string, dto: UpdateCaseDto): Promise<{
+        _count: {
+            updates: number;
+        };
         createdBy: {
-            id: string;
             name: string;
+            id: string;
             avatarUrl: string | null;
         };
         assignee: ({
             user: {
-                id: string;
                 name: string;
+                id: string;
                 avatarUrl: string | null;
             };
         } & {
-            id: string;
             title: string | null;
-            projectId: string;
+            id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
             permissions: string[];
             joinedAt: Date;
+            projectId: string;
         }) | null;
-        _count: {
-            updates: number;
-        };
     } & {
-        id: string;
-        title: string;
-        description: string | null;
-        status: import(".prisma/client").$Enums.CaseStatus;
         priority: import(".prisma/client").$Enums.CasePriority;
-        dueDate: Date | null;
-        closedAt: Date | null;
+        description: string | null;
+        title: string;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
         projectId: string;
+        status: import(".prisma/client").$Enums.CaseStatus;
+        dueDate: Date | null;
+        closedAt: Date | null;
         createdById: string;
         assigneeId: string | null;
     }>;
     remove(userId: string, projectId: string, caseId: string): Promise<{
-        id: string;
-        title: string;
-        description: string | null;
-        status: import(".prisma/client").$Enums.CaseStatus;
         priority: import(".prisma/client").$Enums.CasePriority;
-        dueDate: Date | null;
-        closedAt: Date | null;
+        description: string | null;
+        title: string;
+        id: string;
         createdAt: Date;
         updatedAt: Date;
         projectId: string;
+        status: import(".prisma/client").$Enums.CaseStatus;
+        dueDate: Date | null;
+        closedAt: Date | null;
         createdById: string;
         assigneeId: string | null;
     }>;
     private caseIncludes;
     checkMemberAccess(userId: string, projectId: string, roles?: string[]): Promise<{
-        id: string;
         title: string | null;
-        projectId: string;
+        id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
         permissions: string[];
         joinedAt: Date;
+        projectId: string;
     }>;
 }

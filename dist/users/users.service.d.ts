@@ -4,18 +4,18 @@ export declare class UsersService {
     private prisma;
     constructor(prisma: PrismaService);
     getMe(userId: string): Promise<{
-        id: string;
-        email: string;
         name: string;
+        email: string;
+        id: string;
         avatarUrl: string | null;
         plan: import(".prisma/client").$Enums.SubscriptionPlan;
         planExpiresAt: Date | null;
         createdAt: Date;
     }>;
     updateProfile(userId: string, dto: UpdateProfileDto): Promise<{
-        id: string;
-        email: string;
         name: string;
+        email: string;
+        id: string;
         avatarUrl: string | null;
         plan: import(".prisma/client").$Enums.SubscriptionPlan;
         createdAt: Date;

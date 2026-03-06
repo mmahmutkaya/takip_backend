@@ -7,38 +7,38 @@ export declare class CaseUpdatesService {
     constructor(prisma: PrismaService, notifications: NotificationsService);
     create(userId: string, projectId: string, caseId: string, dto: CreateCaseUpdateDto): Promise<{
         author: {
-            id: string;
             name: string;
+            id: string;
             avatarUrl: string | null;
         };
     } & {
         id: string;
-        content: string;
         createdAt: Date;
         updatedAt: Date;
         caseId: string;
+        content: string;
         authorId: string;
     }>;
     findAll(userId: string, projectId: string, caseId: string): Promise<({
         author: {
-            id: string;
             name: string;
+            id: string;
             avatarUrl: string | null;
         };
     } & {
         id: string;
-        content: string;
         createdAt: Date;
         updatedAt: Date;
         caseId: string;
+        content: string;
         authorId: string;
     })[]>;
     remove(userId: string, caseUpdateId: string): Promise<{
         id: string;
-        content: string;
         createdAt: Date;
         updatedAt: Date;
         caseId: string;
+        content: string;
         authorId: string;
     }>;
 }
