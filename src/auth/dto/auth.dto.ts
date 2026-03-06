@@ -34,3 +34,17 @@ export class RefreshTokenDto {
   @IsNotEmpty()
   refreshToken: string;
 }
+
+export class VerifyEmailDto {
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  token: string;
+}
+
+export class ResendVerificationDto {
+  @ApiProperty({ example: 'ahmet@example.com' })
+  @IsEmail()
+  email: string;
+}
+

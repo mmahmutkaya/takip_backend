@@ -41,48 +41,78 @@ var __importStar = (this && this.__importStar) || (function () {
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var AuthService_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const jwt_1 = require("@nestjs/jwt");
 const config_1 = require("@nestjs/config");
 const bcrypt = __importStar(require("bcrypt"));
+const crypto = __importStar(require("crypto"));
 const prisma_service_1 = require("../prisma/prisma.service");
-let AuthService = class AuthService {
+const mail_service_1 = require("../mail/mail.service");
+let AuthService = AuthService_1 = class AuthService {
     prisma;
     jwtService;
     config;
-    constructor(prisma, jwtService, config) {
+    mailService;
+    logger = new common_1.Logger(AuthService_1.name);
+    constructor(prisma, jwtService, config, mailService) {
         this.prisma = prisma;
         this.jwtService = jwtService;
         this.config = config;
+        this.mailService = mailService;
     }
     async register(dto) {
-        const existing = await this.prisma.user.findUnique({
-            where: { email: dto.email },
-        });
+        const existing = await this.prisma.user.findUnique({ where: { email: dto.email } });
         if (existing)
             throw new common_1.ConflictException('Bu e-posta zaten kayıtlı');
         const passwordHash = await bcrypt.hash(dto.password, 10);
         const user = await this.prisma.user.create({
-            data: { name: dto.name, email: dto.email, passwordHash },
-            select: { id: true, name: true, email: true, plan: true, createdAt: true },
+            data: { name: dto.name, email: dto.email, passwordHash, isEmailVerified: false },
+            select: { id: true, name: true, email: true, plan: true, isEmailVerified: true, createdAt: true },
         });
-        const tokens = await this.generateTokens(user.id, user.email);
-        return { user, ...tokens };
+        await this.sendVerificationToken(user.id, dto.email, dto.name);
+        return { message: 'Kayıt başarılı. E-posta adresinize doğrulama linki gönderildi.' };
     }
     async login(dto) {
-        const user = await this.prisma.user.findUnique({
-            where: { email: dto.email },
-        });
+        const user = await this.prisma.user.findUnique({ where: { email: dto.email } });
         if (!user || !(await bcrypt.compare(dto.password, user.passwordHash))) {
             throw new common_1.UnauthorizedException('Geçersiz e-posta veya şifre');
         }
         if (!user.isActive)
             throw new common_1.UnauthorizedException('Hesap devre dışı');
+        if (!user.isEmailVerified) {
+            throw new common_1.UnauthorizedException('E-posta adresiniz henüz doğrulanmamış. Lütfen e-postanızı kontrol edin.');
+        }
         const tokens = await this.generateTokens(user.id, user.email);
         const { passwordHash, ...safeUser } = user;
         return { user: safeUser, ...tokens };
+    }
+    async verifyEmail(token) {
+        const record = await this.prisma.emailVerification.findUnique({ where: { token } });
+        if (!record)
+            throw new common_1.BadRequestException('Geçersiz doğrulama linki');
+        if (record.expiresAt < new Date()) {
+            await this.prisma.emailVerification.delete({ where: { id: record.id } });
+            throw new common_1.BadRequestException('Doğrulama linkinin süresi dolmuş. Yeni link talep edin.');
+        }
+        await this.prisma.user.update({
+            where: { id: record.userId },
+            data: { isEmailVerified: true },
+        });
+        await this.prisma.emailVerification.delete({ where: { id: record.id } });
+        return { message: 'E-posta adresiniz başarıyla doğrulandı. Giriş yapabilirsiniz.' };
+    }
+    async resendVerification(dto) {
+        const user = await this.prisma.user.findUnique({ where: { email: dto.email } });
+        if (!user)
+            throw new common_1.NotFoundException('Bu e-posta adresiyle kayıtlı kullanıcı bulunamadı');
+        if (user.isEmailVerified)
+            throw new common_1.ConflictException('E-posta adresi zaten doğrulanmış');
+        await this.prisma.emailVerification.deleteMany({ where: { userId: user.id } });
+        await this.sendVerificationToken(user.id, user.email, user.name);
+        return { message: 'Doğrulama e-postası yeniden gönderildi.' };
     }
     async refresh(refreshToken) {
         const stored = await this.prisma.refreshToken.findUnique({
@@ -100,6 +130,17 @@ let AuthService = class AuthService {
     async logout(refreshToken) {
         await this.prisma.refreshToken.deleteMany({ where: { token: refreshToken } });
     }
+    async sendVerificationToken(userId, email, name) {
+        const token = crypto.randomBytes(32).toString('hex');
+        const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+        await this.prisma.emailVerification.create({ data: { token, userId, expiresAt } });
+        try {
+            await this.mailService.sendVerificationEmail(email, name, token);
+        }
+        catch (err) {
+            this.logger.error(`Mail gönderilemedi [${email}]: ${err.message}`);
+        }
+    }
     async generateTokens(userId, email) {
         const payload = { sub: userId, email };
         const accessToken = this.jwtService.sign(payload);
@@ -116,10 +157,11 @@ let AuthService = class AuthService {
     }
 };
 exports.AuthService = AuthService;
-exports.AuthService = AuthService = __decorate([
+exports.AuthService = AuthService = AuthService_1 = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService,
         jwt_1.JwtService,
-        config_1.ConfigService])
+        config_1.ConfigService,
+        mail_service_1.MailService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

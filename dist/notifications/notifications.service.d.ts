@@ -11,9 +11,9 @@ export declare class NotificationsService {
     private prisma;
     constructor(prisma: PrismaService);
     create(dto: CreateNotificationDto): Promise<{
-        type: import(".prisma/client").$Enums.NotificationType;
         id: string;
         createdAt: Date;
+        type: import(".prisma/client").$Enums.NotificationType;
         message: string;
         isRead: boolean;
         payload: import("@prisma/client/runtime/library").JsonValue | null;
@@ -22,14 +22,14 @@ export declare class NotificationsService {
     }>;
     findAll(userId: string): Promise<({
         case: {
-            title: string;
             id: string;
+            title: string;
             projectId: string;
         } | null;
     } & {
-        type: import(".prisma/client").$Enums.NotificationType;
         id: string;
         createdAt: Date;
+        type: import(".prisma/client").$Enums.NotificationType;
         message: string;
         isRead: boolean;
         payload: import("@prisma/client/runtime/library").JsonValue | null;

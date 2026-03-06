@@ -43,7 +43,7 @@ let CasesController = class CasesController {
 exports.CasesController = CasesController;
 __decorate([
     (0, common_1.Post)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Yeni case oluştur' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Yeni kayıt oluştur' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Param)('projectId')),
     __param(2, (0, common_1.Body)()),
@@ -53,7 +53,7 @@ __decorate([
 ], CasesController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, swagger_1.ApiOperation)({ summary: 'Proje case lerini listele' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Proje kayıtlarını listele' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Param)('projectId')),
     __param(2, (0, common_1.Query)()),
@@ -63,7 +63,7 @@ __decorate([
 ], CasesController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Case detayı' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Kayıt detayı' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Param)('projectId')),
     __param(2, (0, common_1.Param)('id')),
@@ -73,7 +73,7 @@ __decorate([
 ], CasesController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Case güncelle / durum değiştir' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Kayıt güncelle / durum değiştir' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Param)('projectId')),
     __param(2, (0, common_1.Param)('id')),
@@ -84,7 +84,7 @@ __decorate([
 ], CasesController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    (0, swagger_1.ApiOperation)({ summary: 'Case sil' }),
+    (0, swagger_1.ApiOperation)({ summary: 'Kayıt sil' }),
     __param(0, (0, current_user_decorator_1.CurrentUser)()),
     __param(1, (0, common_1.Param)('projectId')),
     __param(2, (0, common_1.Param)('id')),

@@ -28,7 +28,7 @@ let CaseUpdatesService = class CaseUpdatesService {
             throw new common_1.ForbiddenException('Bu projeye erişim yetkiniz yok');
         const caseItem = await this.prisma.case.findFirst({ where: { id: caseId, projectId } });
         if (!caseItem)
-            throw new common_1.NotFoundException('Case bulunamadı');
+            throw new common_1.NotFoundException('Kayıt bulunamadı');
         const update = await this.prisma.caseUpdate.create({
             data: { content: dto.content, caseId, authorId: userId },
             include: { author: { select: { id: true, name: true, avatarUrl: true } } },
@@ -41,7 +41,7 @@ let CaseUpdatesService = class CaseUpdatesService {
                 await this.notifications.create({
                     recipientId: assignee.userId,
                     type: 'CASE_UPDATED',
-                    message: `"${caseItem.title}" case'ine yeni bir güncelleme eklendi`,
+                    message: `"${caseItem.title}" kaydına yeni bir güncelleme eklendi`,
                     caseId,
                     payload: { projectId },
                 });

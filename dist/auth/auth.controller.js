@@ -28,6 +28,12 @@ let AuthController = class AuthController {
     login(dto) {
         return this.authService.login(dto);
     }
+    verifyEmail(dto) {
+        return this.authService.verifyEmail(dto.token);
+    }
+    resendVerification(dto) {
+        return this.authService.resendVerification(dto);
+    }
     refresh(dto) {
         return this.authService.refresh(dto.refreshToken);
     }
@@ -53,6 +59,24 @@ __decorate([
     __metadata("design:paramtypes", [auth_dto_1.LoginDto]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)('verify-email'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({ summary: 'E-posta doğrula' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [auth_dto_1.VerifyEmailDto]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "verifyEmail", null);
+__decorate([
+    (0, common_1.Post)('resend-verification'),
+    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, swagger_1.ApiOperation)({ summary: 'Doğrulama e-postasını yeniden gönder' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [auth_dto_1.ResendVerificationDto]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "resendVerification", null);
 __decorate([
     (0, common_1.Post)('refresh'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),

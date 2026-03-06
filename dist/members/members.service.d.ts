@@ -7,46 +7,50 @@ export declare class MembersService {
     constructor(prisma: PrismaService, notifications: NotificationsService);
     invite(adminId: string, projectId: string, dto: InviteMemberDto): Promise<{
         user: {
-            name: string;
-            email: string;
             id: string;
+            email: string;
+            name: string;
         };
     } & {
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     }>;
     findAll(userId: string, projectId: string): Promise<({
         user: {
-            name: string;
-            email: string;
             id: string;
+            email: string;
+            name: string;
             avatarUrl: string | null;
         };
     } & {
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     })[]>;
     update(adminId: string, projectId: string, memberId: string, dto: UpdateMemberDto): Promise<{
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     }>;
     remove(adminId: string, projectId: string, memberId: string): Promise<{
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     }>;
