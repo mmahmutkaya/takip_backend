@@ -39,9 +39,10 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  await app.listen(process.env.PORT ?? 3001);
-  console.log(`Application running on: http://localhost:${process.env.PORT ?? 3001}`);
-  console.log(`Swagger docs: http://localhost:${process.env.PORT ?? 3001}/api/docs`);
+  const port = process.env.PORT ?? 3001;
+  await app.listen(port, '0.0.0.0');
+  console.log(`Application running on: http://localhost:${port}`);
+  console.log(`Swagger docs: http://localhost:${port}/api/docs`);
 }
 
 function toTurkishValidationMessages(error: ValidationError, parentPath?: string): string[] {
