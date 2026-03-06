@@ -32,9 +32,13 @@ async function bootstrap() {
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api/docs', app, document);
-    await app.listen(process.env.PORT ?? 3001);
-    console.log(`Application running on: http://localhost:${process.env.PORT ?? 3001}`);
-    console.log(`Swagger docs: http://localhost:${process.env.PORT ?? 3001}/api/docs`);
+    app.getHttpAdapter().get('/health', (_req, res) => {
+        res.status(200).json({ status: 'ok' });
+    });
+    const port = process.env.PORT ?? 3001;
+    await app.listen(port, '0.0.0.0');
+    console.log(`Application running on: http://localhost:${port}`);
+    console.log(`Swagger docs: http://localhost:${port}/api/docs`);
 }
 function toTurkishValidationMessages(error, parentPath) {
     const fieldPath = parentPath ? `${parentPath}.${error.property}` : error.property;
