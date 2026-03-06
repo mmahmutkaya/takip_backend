@@ -6,26 +6,26 @@ export declare class ProjectsService {
     create(userId: string, dto: CreateProjectDto): Promise<{
         members: ({
             user: {
-                id: string;
-                email: string;
                 name: string;
+                email: string;
+                id: string;
             };
         } & {
+            title: string | null;
             id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
-            title: string | null;
             permissions: string[];
             joinedAt: Date;
             projectId: string;
         })[];
     } & {
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
     findAll(userId: string): Promise<({
@@ -34,16 +34,16 @@ export declare class ProjectsService {
             cases: number;
         };
         members: {
-            role: import(".prisma/client").$Enums.ProjectRole;
             title: string | null;
+            role: import(".prisma/client").$Enums.ProjectRole;
         }[];
     } & {
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     })[]>;
     findOne(userId: string, projectId: string): Promise<{
@@ -52,45 +52,45 @@ export declare class ProjectsService {
         };
         members: ({
             user: {
-                id: string;
-                email: string;
                 name: string;
+                email: string;
+                id: string;
                 avatarUrl: string | null;
             };
         } & {
+            title: string | null;
             id: string;
             userId: string;
             role: import(".prisma/client").$Enums.ProjectRole;
-            title: string | null;
             permissions: string[];
             joinedAt: Date;
             projectId: string;
         })[];
     } & {
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
     update(userId: string, projectId: string, dto: UpdateProjectDto): Promise<{
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
     remove(userId: string, projectId: string): Promise<{
-        id: string;
         name: string;
+        description: string | null;
+        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        description: string | null;
         slug: string;
     }>;
     private checkAdminAccess;

@@ -17,9 +17,9 @@ export declare class AuthService {
         accessToken: string;
         refreshToken: string;
         user: {
-            id: string;
-            email: string;
             name: string;
+            email: string;
+            id: string;
             avatarUrl: string | null;
             isActive: boolean;
             isEmailVerified: boolean;
@@ -39,9 +39,9 @@ export declare class AuthService {
         accessToken: string;
         refreshToken: string;
         user: {
-            id: string;
-            email: string;
             name: string;
+            email: string;
+            id: string;
             avatarUrl: string | null;
             isActive: boolean;
             isEmailVerified: boolean;
