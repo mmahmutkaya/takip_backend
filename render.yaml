@@ -11,7 +11,6 @@ services:
     plan: free
     branch: master
     autoDeploy: true
-    healthCheckPath: /
     buildCommand: npm ci --include=dev && npm run build && npx prisma generate
     startCommand: npx prisma migrate deploy && npm run start:prod
     envVars:
