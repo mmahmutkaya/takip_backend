@@ -5,46 +5,50 @@ export declare class MembersController {
     constructor(membersService: MembersService);
     invite(user: any, projectId: string, dto: InviteMemberDto): Promise<{
         user: {
-            name: string;
-            email: string;
             id: string;
+            email: string;
+            name: string;
         };
     } & {
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     }>;
     findAll(user: any, projectId: string): Promise<({
         user: {
-            name: string;
-            email: string;
             id: string;
+            email: string;
+            name: string;
             avatarUrl: string | null;
         };
     } & {
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     })[]>;
     update(user: any, projectId: string, id: string, dto: UpdateMemberDto): Promise<{
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     }>;
     remove(user: any, projectId: string, id: string): Promise<{
-        title: string | null;
         id: string;
         userId: string;
         role: import(".prisma/client").$Enums.ProjectRole;
+        title: string | null;
+        permissions: string[];
         joinedAt: Date;
         projectId: string;
     }>;

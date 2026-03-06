@@ -10,3 +10,9 @@ export declare class LoginDto {
 export declare class RefreshTokenDto {
     refreshToken: string;
 }
+export declare class VerifyEmailDto {
+    token: string;
+}
+export declare class ResendVerificationDto {
+    email: string;
+}

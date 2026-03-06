@@ -11,6 +11,14 @@ async function bootstrap() {
         whitelist: true,
         forbidNonWhitelisted: true,
         transform: true,
+        exceptionFactory: (errors) => {
+            const messages = errors.flatMap((error) => toTurkishValidationMessages(error));
+            return new common_1.BadRequestException({
+                statusCode: 400,
+                message: messages.length ? messages : ['Geçersiz istek'],
+                error: 'Bad Request',
+            });
+        },
     }));
     app.enableCors({
         origin: process.env.CORS_ORIGIN?.split(',') ?? ['http://localhost:3000'],
@@ -18,7 +26,7 @@ async function bootstrap() {
     });
     const config = new swagger_1.DocumentBuilder()
         .setTitle('Takip API')
-        .setDescription('Case takip sistemi API')
+        .setDescription('Kayıt takip sistemi API')
         .setVersion('1.0')
         .addBearerAuth()
         .build();
@@ -27,6 +35,48 @@ async function bootstrap() {
     await app.listen(process.env.PORT ?? 3001);
     console.log(`Application running on: http://localhost:${process.env.PORT ?? 3001}`);
     console.log(`Swagger docs: http://localhost:${process.env.PORT ?? 3001}/api/docs`);
+}
+function toTurkishValidationMessages(error, parentPath) {
+    const fieldPath = parentPath ? `${parentPath}.${error.property}` : error.property;
+    const label = fieldPath || 'Alan';
+    const currentMessages = Object.entries(error.constraints ?? {}).map(([rule, defaultMessage]) => {
+        switch (rule) {
+            case 'isNotEmpty':
+                return `${label} boş bırakılamaz`;
+            case 'isString':
+                return `${label} metin olmalıdır`;
+            case 'isEmail':
+                return `${label} geçerli bir e-posta adresi olmalıdır`;
+            case 'minLength': {
+                const min = extractNumber(defaultMessage);
+                return min
+                    ? `${label} en az ${min} karakter olmalıdır`
+                    : `${label} yeterli uzunlukta olmalıdır`;
+            }
+            case 'maxLength': {
+                const max = extractNumber(defaultMessage);
+                return max
+                    ? `${label} en fazla ${max} karakter olmalıdır`
+                    : `${label} çok uzun`;
+            }
+            case 'matches':
+                return `${label} geçerli formatta olmalıdır`;
+            case 'isEnum':
+                return `${label} için geçerli bir değer girin`;
+            case 'isDateString':
+                return `${label} geçerli bir tarih formatında olmalıdır`;
+            case 'isUrl':
+                return `${label} geçerli bir URL olmalıdır`;
+            default:
+                return defaultMessage;
+        }
+    });
+    const childMessages = (error.children ?? []).flatMap((child) => toTurkishValidationMessages(child, fieldPath));
+    return [...currentMessages, ...childMessages];
+}
+function extractNumber(text) {
+    const match = text.match(/\d+/);
+    return match ? Number(match[0]) : null;
 }
 bootstrap();
 //# sourceMappingURL=main.js.map

@@ -13,31 +13,31 @@ export class CasesController {
   constructor(private casesService: CasesService) {}
 
   @Post()
-  @ApiOperation({ summary: 'Yeni case oluştur' })
+  @ApiOperation({ summary: 'Yeni kayıt oluştur' })
   create(@CurrentUser() user: any, @Param('projectId') projectId: string, @Body() dto: CreateCaseDto) {
     return this.casesService.create(user.id, projectId, dto);
   }
 
   @Get()
-  @ApiOperation({ summary: 'Proje case lerini listele' })
+  @ApiOperation({ summary: 'Proje kayıtlarını listele' })
   findAll(@CurrentUser() user: any, @Param('projectId') projectId: string, @Query() filter: FilterCaseDto) {
     return this.casesService.findAll(user.id, projectId, filter);
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Case detayı' })
+  @ApiOperation({ summary: 'Kayıt detayı' })
   findOne(@CurrentUser() user: any, @Param('projectId') projectId: string, @Param('id') id: string) {
     return this.casesService.findOne(user.id, projectId, id);
   }
 
   @Patch(':id')
-  @ApiOperation({ summary: 'Case güncelle / durum değiştir' })
+  @ApiOperation({ summary: 'Kayıt güncelle / durum değiştir' })
   update(@CurrentUser() user: any, @Param('projectId') projectId: string, @Param('id') id: string, @Body() dto: UpdateCaseDto) {
     return this.casesService.update(user.id, projectId, id, dto);
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Case sil' })
+  @ApiOperation({ summary: 'Kayıt sil' })
   remove(@CurrentUser() user: any, @Param('projectId') projectId: string, @Param('id') id: string) {
     return this.casesService.remove(user.id, projectId, id);
   }

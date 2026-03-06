@@ -30,7 +30,7 @@ export class CasesService {
       await this.notifications.create({
         recipientId: caseItem.assignee.userId,
         type: 'CASE_ASSIGNED',
-        message: `Size "${caseItem.title}" case'i atandı`,
+        message: `Size "${caseItem.title}" kaydı atandı`,
         caseId: caseItem.id,
         payload: { projectId },
       });
@@ -65,14 +65,14 @@ export class CasesService {
         },
       },
     });
-    if (!caseItem) throw new NotFoundException('Case bulunamadı');
+    if (!caseItem) throw new NotFoundException('Kayıt bulunamadı');
     return caseItem;
   }
 
   async update(userId: string, projectId: string, caseId: string, dto: UpdateCaseDto) {
     await this.checkMemberAccess(userId, projectId, ['OWNER', 'ADMIN', 'MEMBER']);
     const existing = await this.prisma.case.findFirst({ where: { id: caseId, projectId } });
-    if (!existing) throw new NotFoundException('Case bulunamadı');
+    if (!existing) throw new NotFoundException('Kayıt bulunamadı');
 
     const data: any = { ...dto };
     if (dto.dueDate) data.dueDate = new Date(dto.dueDate);
@@ -89,7 +89,7 @@ export class CasesService {
       await this.notifications.create({
         recipientId: updated.assignee.userId,
         type: 'CASE_ASSIGNED',
-        message: `Size "${updated.title}" case'i atandı`,
+        message: `Size "${updated.title}" kaydı atandı`,
         caseId: updated.id,
         payload: { projectId },
       });
@@ -101,7 +101,7 @@ export class CasesService {
   async remove(userId: string, projectId: string, caseId: string) {
     await this.checkMemberAccess(userId, projectId, ['OWNER', 'ADMIN']);
     const existing = await this.prisma.case.findFirst({ where: { id: caseId, projectId } });
-    if (!existing) throw new NotFoundException('Case bulunamadı');
+    if (!existing) throw new NotFoundException('Kayıt bulunamadı');
     return this.prisma.case.delete({ where: { id: caseId } });
   }
 

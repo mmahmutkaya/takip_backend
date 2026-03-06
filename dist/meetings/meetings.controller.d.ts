@@ -6,94 +6,94 @@ export declare class MeetingsController {
     create(user: any, projectId: string, dto: CreateMeetingDto): Promise<{
         createdBy: {
             id: string;
-            name: string;
             email: string;
+            name: string;
         };
     } & {
-        description: string | null;
-        title: string;
-        scheduledAt: Date;
-        location: string | null;
         id: string;
-        projectId: string;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        title: string;
+        projectId: string;
         createdById: string;
+        scheduledAt: Date;
+        location: string | null;
     }>;
     findAll(user: any, projectId: string): Promise<({
-        createdBy: {
-            id: string;
-            name: string;
-            email: string;
-        };
         _count: {
             cases: number;
         };
-    } & {
-        description: string | null;
-        title: string;
-        scheduledAt: Date;
-        location: string | null;
-        id: string;
-        projectId: string;
-        createdAt: Date;
-        updatedAt: Date;
-        createdById: string;
-    })[]>;
-    findOne(user: any, projectId: string, id: string): Promise<{
         createdBy: {
             id: string;
-            name: string;
             email: string;
+            name: string;
         };
+    } & {
+        id: string;
+        createdAt: Date;
+        updatedAt: Date;
+        description: string | null;
+        title: string;
+        projectId: string;
+        createdById: string;
+        scheduledAt: Date;
+        location: string | null;
+    })[]>;
+    findOne(user: any, projectId: string, id: string): Promise<{
         cases: ({
             case: {
-                title: string;
                 id: string;
+                title: string;
                 status: import(".prisma/client").$Enums.CaseStatus;
                 priority: import(".prisma/client").$Enums.CasePriority;
             };
         } & {
-            meetingId: string;
             caseId: string;
+            meetingId: string;
         })[];
+        createdBy: {
+            id: string;
+            email: string;
+            name: string;
+        };
     } & {
-        description: string | null;
-        title: string;
-        scheduledAt: Date;
-        location: string | null;
         id: string;
-        projectId: string;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        title: string;
+        projectId: string;
         createdById: string;
+        scheduledAt: Date;
+        location: string | null;
     }>;
     update(user: any, projectId: string, id: string, dto: UpdateMeetingDto): Promise<{
         createdBy: {
             id: string;
-            name: string;
             email: string;
+            name: string;
         };
     } & {
-        description: string | null;
-        title: string;
-        scheduledAt: Date;
-        location: string | null;
         id: string;
-        projectId: string;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        title: string;
+        projectId: string;
         createdById: string;
+        scheduledAt: Date;
+        location: string | null;
     }>;
     remove(user: any, projectId: string, id: string): Promise<{
-        description: string | null;
-        title: string;
-        scheduledAt: Date;
-        location: string | null;
         id: string;
-        projectId: string;
         createdAt: Date;
         updatedAt: Date;
+        description: string | null;
+        title: string;
+        projectId: string;
         createdById: string;
+        scheduledAt: Date;
+        location: string | null;
     }>;
 }

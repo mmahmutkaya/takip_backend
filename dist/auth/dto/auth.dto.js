@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RefreshTokenDto = exports.LoginDto = exports.RegisterDto = void 0;
+exports.ResendVerificationDto = exports.VerifyEmailDto = exports.RefreshTokenDto = exports.LoginDto = exports.RegisterDto = void 0;
 const class_validator_1 = require("class-validator");
 const swagger_1 = require("@nestjs/swagger");
 class RegisterDto {
@@ -61,4 +61,23 @@ __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     __metadata("design:type", String)
 ], RefreshTokenDto.prototype, "refreshToken", void 0);
+class VerifyEmailDto {
+    token;
+}
+exports.VerifyEmailDto = VerifyEmailDto;
+__decorate([
+    (0, swagger_1.ApiProperty)(),
+    (0, class_validator_1.IsString)(),
+    (0, class_validator_1.IsNotEmpty)(),
+    __metadata("design:type", String)
+], VerifyEmailDto.prototype, "token", void 0);
+class ResendVerificationDto {
+    email;
+}
+exports.ResendVerificationDto = ResendVerificationDto;
+__decorate([
+    (0, swagger_1.ApiProperty)({ example: 'ahmet@example.com' }),
+    (0, class_validator_1.IsEmail)(),
+    __metadata("design:type", String)
+], ResendVerificationDto.prototype, "email", void 0);
 //# sourceMappingURL=auth.dto.js.map
