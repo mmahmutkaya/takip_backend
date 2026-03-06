@@ -25,7 +25,7 @@ export class MailService {
 
     this.logger.log(`Doğrulama linki [${email}]: ${verifyUrl}`);
 
-    await this.transporter.sendMail({
+    const info = await this.transporter.sendMail({
       from: this.config.get('SMTP_FROM') ?? '"Takip" <noreply@takip.app>',
       to: email,
       subject: 'E-posta adresinizi doğrulayın — Takip',
@@ -41,5 +41,7 @@ export class MailService {
         </div>
       `,
     });
+
+    this.logger.log(`Doğrulama maili gönderildi [${email}] -> ${info.messageId}`);
   }
 }

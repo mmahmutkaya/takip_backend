@@ -4,6 +4,7 @@ import {
   ConflictException,
   NotFoundException,
   BadRequestException,
+  ServiceUnavailableException,
   Logger,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
@@ -105,12 +106,16 @@ export class AuthService {
     const token = crypto.randomBytes(32).toString('hex');
     const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
 
-    await this.prisma.emailVerification.create({ data: { token, userId, expiresAt } });
+    const verification = await this.prisma.emailVerification.create({ data: { token, userId, expiresAt } });
 
     try {
       await this.mailService.sendVerificationEmail(email, name, token);
     } catch (err) {
       this.logger.error(`Mail gönderilemedi [${email}]: ${(err as Error).message}`);
+      await this.prisma.emailVerification.deleteMany({ where: { id: verification.id } });
+      throw new ServiceUnavailableException(
+        'Doğrulama e-postası gönderilemedi. Lütfen daha sonra tekrar deneyin.',
+      );
     }
   }
 
